@@ -3,7 +3,7 @@
   "description": "javascript config function like laravel config",
   "author": "estagent <estagent@gmail.com>",
   "keywords": ["javascript","config","laravel"],
-  "version": "2.0.1",
+  "version": "2.1.1",
   "main": "index.js",
   "license": "MIT",
   "devDependencies": {
