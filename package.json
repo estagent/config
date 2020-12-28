@@ -1,6 +1,6 @@
 {
   "name": "@revgaming/config",
-  "version": "2.1.2",
+  "version": "2.2.1",
   "description": "javascript config function like laravel config",
   "author": "estagent <estagent@gmail.com>",
   "keywords": [
@@ -10,10 +10,10 @@
   ],
   "main": "index.js",
   "license": "MIT",
-  "devDependencies": {
-    "lodash": "^4.17.20"
-  },
   "scripts": {
     "build": "webpack"
+  },
+  "dependencies": {
+    "object-path": "^0.11.5"
   }
 }

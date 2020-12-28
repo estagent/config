@@ -1,7 +1,26 @@
-import set from 'lodash/set'
+import objectPath from 'object-path'
 
 const Config = {}
 
+/**
+ *
+ * @param mixed
+ * @param def
+ * @returns {any}
+ */
+export const config = (mixed, def) => {
+  if (typeof mixed === 'object') {
+    for (let path of Object.keys(mixed))
+      objectPath.set(Config, path, mixed[path])
+  } else if (typeof mixed == 'string') {
+    return objectPath.get(Config, mixed) ?? def
+  } else throw 'invalid config input'
+}
+
+/**
+ *
+ * @param key
+ */
 const globalizeConfig = function (key) {
   if (key === false) return
   if (window[key] !== undefined) throw 'config already registered'
@@ -17,31 +36,7 @@ export const mergeConfigs = configs => {
 }
 
 export const bootConfig = opts => {
-  globalizeConfig(opts.config_global ?? "config");
-  if (opts.hasOwnProperty("configs"))
-    mergeConfigs(opts.configs);
-  else if (opts) mergeConfigs(opts);
-};
-
-
-const __setter = configs => {
-  for (let dotted of Object.keys(configs)) {
-    const value = configs[dotted]
-    if (typeof dotted !== 'string') throw 'invalid key'
-    if (value instanceof Object || Array.isArray(value))
-      throw 'value can not be object or array'
-    set(Config, dotted, value)
-  }
-}
-
-export const config = (code, def = null) => {
-  if (typeof code === 'object') return __setter(code)
-  else if (!(typeof code == 'string')) throw 'invalid config input'
-  try {
-    const value = eval(`Config.${code}`)
-    if (value === undefined) return def
-    return value
-  } catch (err) {
-    return def
-  }
+  globalizeConfig(opts.config_global ?? 'config')
+  if (opts.hasOwnProperty('configs')) mergeConfigs(opts.configs)
+  else if (opts) mergeConfigs(opts)
 }
