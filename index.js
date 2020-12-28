@@ -16,18 +16,13 @@ export const mergeConfigs = configs => {
   }
 }
 
-/**
- *
- * @param  opts object
- */
 export const bootConfig = opts => {
-  if (opts.hasOwnProperty('config_global')) globalizeConfig(opts.config_global)
-  else if (opts.hasOwnProperty('configs')) mergeConfigs(opts.configs)
-  else {
-    if (opts) mergeConfigs(opts)
-    globalizeConfig('config')
-  }
-}
+  globalizeConfig(opts.config_global ?? "config");
+  if (opts.hasOwnProperty("configs"))
+    mergeConfigs(opts.configs);
+  else if (opts) mergeConfigs(opts);
+};
+
 
 const __setter = configs => {
   for (let dotted of Object.keys(configs)) {
