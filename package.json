@@ -1,9 +1,13 @@
 {
   "name": "@revgaming/config",
+  "version": "2.1.1",
   "description": "javascript config function like laravel config",
   "author": "estagent <estagent@gmail.com>",
-  "keywords": ["javascript","config","laravel"],
-  "version": "2.1.1",
+  "keywords": [
+    "javascript",
+    "config",
+    "laravel"
+  ],
   "main": "index.js",
   "license": "MIT",
   "devDependencies": {

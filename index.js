@@ -10,10 +10,8 @@ const globalizeConfig = function (key) {
 
 export const mergeConfigs = configs => {
   if (typeof configs !== 'object') throw 'configs must be object'
-
   for (let key of Object.keys(configs)) {
     if (Config[key]) throw 'config key already exists'
-
     Config[key] = configs[key]
   }
 }
@@ -34,12 +32,9 @@ export const bootConfig = opts => {
 const __setter = configs => {
   for (let dotted of Object.keys(configs)) {
     const value = configs[dotted]
-
     if (typeof dotted !== 'string') throw 'invalid key'
-
     if (value instanceof Object || Array.isArray(value))
       throw 'value can not be object or array'
-
     set(Config, dotted, value)
   }
 }
