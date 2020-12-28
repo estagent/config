@@ -3,9 +3,9 @@
   "description": "javascript config function like laravel config",
   "author": "estagent <estagent@gmail.com>",
   "keywords": ["javascript","config","laravel"],
-  "version": "1.0.1",
+  "version": "2.0.1",
   "main": "index.js",
-  "license": "ISC",
+  "license": "MIT",
   "devDependencies": {
     "lodash": "^4.17.20"
   },
