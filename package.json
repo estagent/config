@@ -1,6 +1,6 @@
 {
   "name": "@revgaming/config",
-  "version": "2.2.2",
+  "version": "2.2.3",
   "description": "javascript config function like laravel config",
   "author": "estagent <estagent@gmail.com>",
   "keywords": [

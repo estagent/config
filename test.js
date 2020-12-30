@@ -1,4 +1,4 @@
-import {config, mergeConfigs, globalizeConfig} from './index'
+import {config, mergeConfig, globalizeConfig} from './index'
 
 require('dotenv').config()
 
@@ -15,7 +15,7 @@ const app = {
   global_language: 'en',
 }
 
-mergeConfigs({app: app})
+mergeConfig({app: app})
 globalizeConfig('config')
 
 console.log(config('app.name'))

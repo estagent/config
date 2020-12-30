@@ -27,7 +27,9 @@ const globalizeConfig = function (key) {
   window[key] = config
 }
 
-export const mergeConfigs = configs => {
+export const mergeConfig = configs => {
+  if (arguments.length > 1) for (let config of arguments) mergeConfig(config)
+  if (Array.isArray(configs)) for (let config of configs) mergeConfig(config)
   if (typeof configs !== 'object') throw 'configs must be object'
   for (let key of Object.keys(configs)) {
     if (Config[key]) throw `config key(${key}) already exists`
@@ -37,6 +39,6 @@ export const mergeConfigs = configs => {
 
 export const bootConfig = opts => {
   globalizeConfig(opts.config_global ?? 'config')
-  if (opts.hasOwnProperty('configs')) mergeConfigs(opts.configs)
-  else if (opts) mergeConfigs(opts)
+  if (opts.hasOwnProperty('configs')) mergeConfig(opts.configs)
+  else if (opts) mergeConfig(opts)
 }
