@@ -30,7 +30,7 @@ const globalizeConfig = function (key) {
 export const mergeConfigs = configs => {
   if (typeof configs !== 'object') throw 'configs must be object'
   for (let key of Object.keys(configs)) {
-    if (Config[key]) throw 'config key already exists'
+    if (Config[key]) throw `config key(${key}) already exists`
     Config[key] = configs[key]
   }
 }
