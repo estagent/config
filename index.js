@@ -29,12 +29,14 @@ const globalizeConfig = function (key) {
 
 export const mergeConfig = configs => {
   if (arguments.length > 1) for (let config of arguments) mergeConfig(config)
-  if (Array.isArray(configs)) for (let config of configs) mergeConfig(config)
-  if (typeof configs !== 'object') throw 'configs must be object'
-  for (let key of Object.keys(configs)) {
-    if (Config[key]) throw `config key(${key}) already exists`
-    Config[key] = configs[key]
-  }
+  else if (Array.isArray(configs))
+    for (let config of configs) mergeConfig(config)
+  else if (typeof configs === 'object')
+    for (let key of Object.keys(configs)) {
+      if (Config[key]) throw `config key(${key}) already exists`
+      Config[key] = configs[key]
+    }
+  else throw 'invalid mergeConfig argument'
 }
 
 export const bootConfig = opts => {
