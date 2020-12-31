@@ -1,6 +1,6 @@
-import objectPath from 'object-path'
+import objectPath from "object-path";
 
-const Config = {}
+const Config = {};
 
 /**
  *
@@ -9,38 +9,38 @@ const Config = {}
  * @returns {any}
  */
 export const config = (mixed, def) => {
-  if (typeof mixed === 'object') {
+  if (typeof mixed === "object") {
     for (let path of Object.keys(mixed))
-      objectPath.set(Config, path, mixed[path])
-  } else if (typeof mixed == 'string') {
-    return objectPath.get(Config, mixed) ?? def
-  } else throw 'invalid config input'
-}
+      objectPath.set(Config, path, mixed[path]);
+  } else if (typeof mixed == "string") {
+    return objectPath.get(Config, mixed) ?? def;
+  } else throw "invalid config input";
+};
 
 /**
  *
  * @param key
  */
-const globalizeConfig = function (key) {
-  if (key === false) return
-  if (window[key] !== undefined) throw 'config already registered'
-  window[key] = config
-}
+const globalizeConfig = function(key) {
+  if (key === false) return;
+  if (window[key] !== undefined) throw "config already registered";
+  window[key] = config;
+};
 
-export const mergeConfig = configs => {
-  if (arguments.length > 1) for (let config of arguments) mergeConfig(config)
-  else if (Array.isArray(configs))
-    for (let config of configs) mergeConfig(config)
-  else if (typeof configs === 'object')
+export const mergeConfig = function(configs) {
+  if (arguments.length > 1) Array.from(arguments).forEach(config => mergeConfig(config));
+  else if (Array.isArray(configs)) configs.forEach(config => mergeConfig(config));
+  else if (typeof configs === "object")
     for (let key of Object.keys(configs)) {
-      if (Config[key]) throw `config key(${key}) already exists`
-      Config[key] = configs[key]
+      if (Config[key]) throw `config key(${key}) already exists`;
+      Config[key] = configs[key];
     }
-  else throw 'invalid mergeConfig argument'
-}
+  else throw "invalid mergeConfig argument";
+};
+
 
 export const bootConfig = opts => {
-  globalizeConfig(opts.config_global ?? 'config')
-  if (opts.hasOwnProperty('configs')) mergeConfig(opts.configs)
-  else if (opts) mergeConfig(opts)
-}
+  globalizeConfig(opts.config_global ?? "config");
+  if (opts.hasOwnProperty("config")) mergeConfig(opts.config);
+  else if (opts) mergeConfig(opts);
+};
