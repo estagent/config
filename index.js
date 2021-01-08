@@ -44,7 +44,5 @@ export const bootConfig = opts => {
   else if (opts) mergeConfig(opts)
   return {
     config: config,
-    mergeConfig: mergeConfig,
-    globalizeConfig: globalizeConfig,
   }
 }
