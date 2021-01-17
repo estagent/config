@@ -39,7 +39,7 @@ export const mergeConfig = function(configs) {
 }
 
 export const bootConfig = opts => {
-  globalizeConfig(opts.config_global ?? 'config')
+  globalizeConfig(opts.global ?? 'config')
   if (opts.hasOwnProperty('config')) mergeConfig(opts.config)
   else if (opts) mergeConfig(opts)
   return {
